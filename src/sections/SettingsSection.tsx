@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -56,6 +56,15 @@ export function SettingsSection({
   const [localGistToken, setLocalGistToken] = useState(gistToken);
   const [localGistId, setLocalGistId] = useState(gistId);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 同步本地状态与 props
+  useEffect(() => {
+    setLocalGistToken(gistToken);
+  }, [gistToken]);
+
+  useEffect(() => {
+    setLocalGistId(gistId);
+  }, [gistId]);
 
   // 处理导出
   const handleExport = () => {
